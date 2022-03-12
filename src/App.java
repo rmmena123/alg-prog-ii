@@ -168,8 +168,87 @@ public class App {
         }
     }
 
+    // ----------------------------------------------------------------------------------------------------------
+
+    // Algoritmos de Ordenação Complexa
+    // • Dividir: o problema é dividido em um determinado número de subproblemas.
+    // • Conquistar: os subproblemas são resolvidos recursivamente.
+    // • Combinar: junta-se as soluções dos subproblemas combinando-os e obtendo ao final a solução do problema original.
+
+    // Merge Sort
+    // • Caso básico: se o vetor ou subvetor possuir apenas um único elemento, ou, se ele for vazio, retornará o próprio vetor, e assim ele será considerado ordenado, uma vez que não existe uma falta de ordem quando há apenas um elemento.
+    // • Caso recursivo: se o vetor ou subvetor possuir dois ou mais elementos, este deve ser dividido em dois subconjuntos a partir de sua posição central.
+    // n log n
+
+    public static void sort(int X[], int inicio, int fim) {
+        if (inicio < fim) {
+            int meio = (inicio + fim) / 2;
+            sort(X, inicio, meio);
+            sort(X, meio + 1, fim);
+
+            merge(X, inicio, meio, fim);
+            System.out.printf("Passo recursivo: %s \n", Arrays.toString(X));
+        }
+    }
+
+    private static void merge(int X[], int inicio, int meio, int fim) {
+        int i, esquerda, direita;
+        int aux[] = new int[X.length];
+
+        for (i = inicio; i <= fim; i++) 
+            aux[i] = X[i];
+
+        esquerda = inicio;
+        direita = meio + 1;
+        i = inicio;
+
+        while (esquerda <= meio && direita <= fim) {
+            if (aux[esquerda] <= aux[direita])
+                X[i++] = aux[esquerda++];
+
+            else 
+                X[i++] = aux[direita++];
+        }
+
+        while (esquerda <= meio) 
+            X[i++] = aux[esquerda++];
+    }
+
+    // Quick sort
+    // • um vetor com os elementos menores que o pivô;
+    // • um vetor com os elementos iguais ao pivô;
+    // • um vetor com os elementos maiores que o pivô.
+    // n log n
+    public static void quicksort(int X[], int inicio, int fim) { 
+        if (inicio < fim) { 
+            int pivot = divide(X, inicio, fim); 
+            quicksort(X, inicio, pivot - 1); 
+            quicksort(X, pivot + 1, fim); 
+        } 
+    } 
+
+    public static int divide(int X[], int inicio, int fim) { 
+        int pivot = X[inicio]; 
+        int postPivot = inicio;
+
+        for (int i = inicio + 1; i <= fim; i++) { 
+            if(X[i] < pivot) { 
+                X[postPivot] = X[i]; 
+                X[i] = X[postPivot + 1]; 
+                postPivot++; 
+            } 
+        } 
+
+        X[postPivot] = pivot; 
+        return postPivot; 
+    }
     public static void main(String[] args) {
         int[] v = {1, 3, 5, 7, 9, 11, 13};
+
+        // Merge Sort
+        int X[] = {31, 10, 29, 42, 51, 19, 83, 7};
+        sort(X, 0, X.length - 1);
+        System.out.printf("Ordenado: %s \n", Arrays.toString(X));
 
         // cálculo do fatorial de 0 a 5
         for(int n = 0; n <= 5; n++)

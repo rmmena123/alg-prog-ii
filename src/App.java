@@ -116,6 +116,58 @@ public class App {
     // Recursão Binária - Duas chamadas recursivas dentro de si - Fibonacci
     // Recursão Múltipla - Múltiplas chanadas recursivas dentro de si
 
+    // ----------------------------------------------------------------------------------------------------------
+
+    // Algoritmos de Ordenação Simples
+
+    // Bubble Sort
+    // A cada iteração, ele compara o elemento em evidência com o seu sucessor. Se o sucessor for menor que o elemento, são trocados de posição
+    public static void bubbleSort(int[] v) {
+        boolean troca = true;
+
+        for (int i = 0; i < v.length && troca; i++) {
+            troca = false;
+
+            for (int j = 0; j < v.length - i - 1; j++) {
+                if (v[j] > v[j + 1])
+                    troca(v, j, j + 1);
+            }
+            System.out.printf("Passagem %d -> %s\n", i, Arrays.toString(v));
+        }
+    }
+
+    // Insertion Sort
+    // O passo a passo do algoritmo começa com a seleção a partir da segunda posição do vetor. Ele copia esse elemento para uma variável auxiliar, depois ele o compara com todos os elementos à sua esquerda. Se ele for menor que o elemento à esquerda, ele continua procurando a posição onde deverá ser inserido. O critério para a posição é: elemento à esquerda menor; à direita, maior
+    public static void insertionSort (int[] v) {
+        for (int i = 1; i < v.length; i++) {
+            int x = v[i];
+
+            for (int j = i - 1; j >= 0 && v[j] > x; j--) {
+                v[j + 1] = v[j];
+                v[j] = x;
+            }
+
+            System.out.printf("Iteração do nro %d -> %s \n", x, Arrays.toString(v));
+        }
+    }
+
+    // Selection Sort
+    // Em linhas gerais, o selection sort percorre todo o vetor em busca do menor elemento não ordenado. Quando ele o encontra, ele posiciona o valor mínimo na primeira posição não ordenada do vetor
+
+    public static void selectionSort(int[] v) {
+        for (int i = 0; i < v.length; i++) {
+            int sindex = i;
+
+            for (int j = i + 1; j < v.length; j++) {
+            if (v[j] < v[sindex]) 
+                sindex = j;
+            }
+
+            troca(v, i, sindex);
+            System.out.printf("Iteração %d -> %s\n", i, Arrays.toString(v));
+        }
+    }
+
     public static void main(String[] args) {
         int[] v = {1, 3, 5, 7, 9, 11, 13};
 

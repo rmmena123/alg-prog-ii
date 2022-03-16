@@ -72,7 +72,7 @@ public class App {
             System.err.println(e.getMessage()); 
         } 
 
-        System.out.printf(“Fila atual: %s.\n”, f.toString()); 
+        System.out.printf("Fila atual: %s.\n", f.toString()); 
 
         try { 
             System.out.printf("Desenfileirando %d <= fila %s.\n", f.desenfileira(), f.toString()); 
